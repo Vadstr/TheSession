@@ -2,11 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuBatton : MonoBehaviour
 {
     public GameObject panel;
+    public Text autorsText;
+    public int speed = 0;
 
     public void NewGame()
     {
@@ -20,9 +24,7 @@ public class MenuBatton : MonoBehaviour
 
     public void Authors()
     {
-        panel.GetComponent<Animator>().SetTrigger("Transition");
-        PrintAutors();
-        panel.GetComponent<Animator>().SetTrigger("Back");
+        StartCoroutine(Autors(new Transition(),new Autors()));
     }
 
     public void Exit()
@@ -33,10 +35,15 @@ public class MenuBatton : MonoBehaviour
 
     public void ChangeLanguage() 
     {
-        LanguageID.languageID += 1;
+        var ID = LanguageID.languageID;
+        ID += 1;
+        LanguageID.languageID = ID % 3;
     }
 
-    private void PrintAutors()
+    public IEnumerator Autors(Transition transition, Autors autors) 
     {
+        yield return StartCoroutine(transition.TransitionAnimationFrom(panel));
+        yield return StartCoroutine(autors.ShowAutors(autorsText, panel, speed));
+        yield return StartCoroutine(transition.TransitionAnimationBack(panel));
     }
 }

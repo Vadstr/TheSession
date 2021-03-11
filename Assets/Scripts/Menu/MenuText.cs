@@ -13,7 +13,7 @@ public class MenuText : MonoBehaviour
 
     void Update()
     {
-        int languageID = LanguageID.languageID % 3;
+        int languageID = LanguageID.languageID;
         string[,] allText = {{"En", "RU", "UA"},
                              {"The session", "Сессия", "Сесія"},
                              {"New Game", "Новая игра", "Нова гра"},
