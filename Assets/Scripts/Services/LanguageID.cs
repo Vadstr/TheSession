@@ -15,7 +15,7 @@ public class LanguageIDAccessor
     public void SaveLanguageID() 
     {
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/LanguageID.dat");
+        FileStream file = File.Create(Application.persistentDataPath + "/LanguageID.datebayo");
         this.languageID = LanguageID.languageID;
         bf.Serialize(file, this);
         file.Close();
@@ -26,7 +26,7 @@ public class LanguageIDAccessor
         if (File.Exists(Application.persistentDataPath + "/LanguageID.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/LanguageID.dat", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/LanguageID.datebayo", FileMode.Open);
             var data = (LanguageIDAccessor)bf.Deserialize(file);
             file.Close();
             LanguageID.languageID = data.languageID;
