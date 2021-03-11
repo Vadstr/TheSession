@@ -6,77 +6,88 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 
-[Serializable]
-class SaveData
+static class SavePlayerData
 {
-    public int LocationID;
-    public int StoryTrigger;
-    public List<float> OtherCaracteristics;
-    public Vector2 CoordinateOnScene;
+    static public int LocationID;
+    static public int StoryTrigger;
+    static public List<float> OtherCaracteristics;
+    static public float CoordinateOnSceneX;
+    static public float CoordinateOnSceneY;
+    static public string NameOfSave;
 }
 
-public class SaveSerializable : MonoBehaviour
+[Serializable]
+public class SaveSerializable
 {
     int LocationIDToSave;
     int StoryTriggerToSave;
     List<float> OtherCaracteristicsToSave;
-    Vector2 CoordinateOnSceneToSave;
-    string NameOfSave;
+    float CoordinateOnSceneXToSave;
+    float CoordinateOnSceneYToSave;
 
-    public SaveSerializable(string name)
+    public SaveSerializable()
     {
         LocationIDToSave = 0;
         StoryTriggerToSave = 0;
         OtherCaracteristicsToSave = new List<float>();
-        CoordinateOnSceneToSave = new Vector2();
-        NameOfSave = name;
+        CoordinateOnSceneXToSave = 0;
+        CoordinateOnSceneYToSave = 0;
+        Debug.Log("creat new save");
     }
 
-    void SaveGame()
+    public void SaveGame()
     {
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath
-          + "/" + NameOfSave + ".dat");
-        SaveData data = new SaveData();
-        data.LocationID = LocationIDToSave;
-        data.StoryTrigger = StoryTriggerToSave;
-        data.OtherCaracteristics = OtherCaracteristicsToSave;
-        data.CoordinateOnScene = CoordinateOnSceneToSave;
-        bf.Serialize(file, data);
+        FileStream file = File.Create(Application.persistentDataPath + "/" + SavePlayerData.NameOfSave + ".dat");
+
+        LocationIDToSave = SavePlayerData.LocationID;
+        StoryTriggerToSave = SavePlayerData.StoryTrigger;
+        OtherCaracteristicsToSave = SavePlayerData.OtherCaracteristics;
+        CoordinateOnSceneXToSave = SavePlayerData.CoordinateOnSceneX;
+        CoordinateOnSceneYToSave = SavePlayerData.CoordinateOnSceneY;
+        bf.Serialize(file, this);
         file.Close();
+        Debug.Log("correct save");
     }
 
-    void LoadGame(string nameOfSave)
+    public void LoadGame(string nameOfSave)
     {
-        if (File.Exists(Application.persistentDataPath
-          + "/" + nameOfSave + ".dat"))
+        if (File.Exists(Application.persistentDataPath + "/" + nameOfSave + ".dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file =
               File.Open(Application.persistentDataPath
               + "/" + nameOfSave + ".dat", FileMode.Open);
-            SaveData data = (SaveData)bf.Deserialize(file);
+            var data = (SaveSerializable)bf.Deserialize(file);
             file.Close();
-            NameOfSave = nameOfSave;
-            LocationIDToSave = data.LocationID;
-            StoryTriggerToSave = data.StoryTrigger;
-            OtherCaracteristicsToSave = data.OtherCaracteristics;
-            CoordinateOnSceneToSave = data.CoordinateOnScene;
+            SavePlayerData.LocationID = data.LocationIDToSave;
+            SavePlayerData.StoryTrigger = data.StoryTriggerToSave;
+            SavePlayerData.OtherCaracteristics = data.OtherCaracteristicsToSave;
+            SavePlayerData.CoordinateOnSceneX = data.CoordinateOnSceneXToSave;
+            SavePlayerData.CoordinateOnSceneY = data.CoordinateOnSceneYToSave;
+            SavePlayerData.NameOfSave = nameOfSave;
+            Debug.Log("correct load");
         }
         else
-            throw new ArgumentNullException("Nothing to load");
+            Debug.LogError("wrong name of save");
+           /* throw new ArgumentNullException("Nothing to load");*/
     }
 
     bool UniquiSaveName(string saveName) 
     {
         var namesOfSaves = GetNamesofSavesList();
-        foreach (var name in namesOfSaves) 
+        if (namesOfSaves.Count == 0)
         {
-            if (name == saveName) 
+            foreach (var name in namesOfSaves)
             {
-                return false;
+                if (name == saveName)
+                {
+                    Debug.Log("not uniqui save name");
+                    return false;
+                }
             }
         }
+        Debug.Log("uniqui save name");
         return true;
     }
 
@@ -91,7 +102,8 @@ public class SaveSerializable : MonoBehaviour
 
         if (namesOfSaves.Count == 0) 
         {
-            throw new ArgumentNullException("0 Saves");
+            Debug.Log("zero saves");
+            /*throw new ArgumentNullException("0 Saves");*/
         }
         return namesOfSaves;
     }
@@ -107,6 +119,7 @@ public class SaveSerializable : MonoBehaviour
                 path.Add(file.FullName);
             }
         }
+        Debug.Log($"we have {path.Count} save");
         return path;
     }
 }

@@ -17,11 +17,11 @@ public class Autors : MonoBehaviour
         {
             autors.transform.Translate(Vector2.up * Time.deltaTime * speed);
             yield return new WaitForSeconds(0.001f);
-            if (autors.transform.localPosition.y > 2000)
+            if (autors.transform.localPosition.y > 1500)
                 i++;
         }
         autors.gameObject.SetActive(false);
-        autors.transform.localPosition = new Vector2(0,-2400);
+        autors.transform.localPosition = new Vector2(0, -2400);
         yield return null;
     }
 
