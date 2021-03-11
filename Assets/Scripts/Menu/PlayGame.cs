@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class PlayGame : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void CreatNewGame() 
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void ContinueGame() 
     {
-        
+
     }
 }

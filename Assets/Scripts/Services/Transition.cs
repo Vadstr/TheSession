@@ -14,8 +14,10 @@ public class Transition : MonoBehaviour
 
     public IEnumerator TransitionToScene(GameObject panel, int scennum)
     {
-        panel.GetComponent<Animator>().SetTrigger("Transition");
-        yield return new WaitForSeconds(0.5f);
+        if (!panel.GetComponent<AnimatorStateInfo>().IsName("TransitionFromMainMenu"))
+        {
+            yield return StartCoroutine(TransitionAnimationFrom(panel));
+        }
         SceneManager.LoadScene(scennum);
     }
 
