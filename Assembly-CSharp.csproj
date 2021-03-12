@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Menu\MenuBatton.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuText.cs" />
     <Compile Include="Assets\Scripts\Menu\PlayGame.cs" />
+    <Compile Include="Assets\Scripts\Menu\ShowSaves.cs" />
     <Compile Include="Assets\Scripts\Services\LanguageID.cs" />
     <Compile Include="Assets\Scripts\Services\SaveData.cs" />
     <Compile Include="Assets\Scripts\Services\Transition.cs" />

@@ -13,6 +13,7 @@ public class MenuBatton : MonoBehaviour
     public GameObject ContinueGamePanel;
     public InputField NewGameName;
     public Text autorsText;
+    public Text allertText;
     public int speed = 0;
     private LanguageIDAccessor languageIdAccessor;
 
@@ -28,9 +29,10 @@ public class MenuBatton : MonoBehaviour
         StartCoroutine(game.CreatNewGame(NewGamePanel, panel));
     }
 
-    public void ContinueGame() 
+    public void ContinueGame()
     {
-        panel.GetComponent<Animator>().SetTrigger("Transition");
+        var game = new PlayGame();
+        StartCoroutine(game.ContinueGame(ContinueGamePanel, panel));
     }
 
     public void Authors()
@@ -44,9 +46,23 @@ public class MenuBatton : MonoBehaviour
         Application.Quit();
     }
 
-    public void CreatGame() 
+    public void CreatGame()
     {
-        SavePlayerData.NameOfSave = NewGameName.text;
+        var save = new SaveSerializable();
+        if (save.UniquiSaveName(NewGameName.text))
+        {
+            SavePlayerData.NameOfSave = NewGameName.text;
+            NewGameName.text = null;
+        }
+        else 
+        {
+            StartCoroutine(ShowAllert());
+        }
+    }
+
+    public void ChoiseSave() 
+    {
+        
     }
 
     public void ChangeLanguage() 
@@ -62,5 +78,19 @@ public class MenuBatton : MonoBehaviour
         yield return StartCoroutine(transition.TransitionAnimationFrom(panel));
         yield return StartCoroutine(autors.ShowAutors(autorsText, panel, speed));
         yield return StartCoroutine(transition.TransitionAnimationBack(panel));
+    }
+
+    public IEnumerator ShowAllert() 
+    {
+        allertText.gameObject.SetActive(true);
+        allertText.color = new Color(1, 0, 0, 1);
+        yield return new WaitForSeconds(0.5f);
+        while (allertText.color.a >= 0.05) 
+        {
+            allertText.color = new Color(1, 0, 0, allertText.color.a - 0.01f);
+            yield return new WaitForSeconds(0.01f);
+        }
+        allertText.gameObject.SetActive(false);
+        yield break;
     }
 }

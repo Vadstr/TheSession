@@ -32,7 +32,6 @@ public class SaveSerializable
         OtherCaracteristicsToSave = new List<float>();
         CoordinateOnSceneXToSave = 0;
         CoordinateOnSceneYToSave = 0;
-        Debug.Log("creat new save");
     }
 
     public void SaveGame()
@@ -68,19 +67,16 @@ public class SaveSerializable
             SavePlayerData.NameOfSave = nameOfSave;
             Debug.Log("correct load");
         }
-        else
-            Debug.LogError("wrong name of save");
-           /* throw new ArgumentNullException("Nothing to load");*/
     }
 
-    bool UniquiSaveName(string saveName) 
+    public bool UniquiSaveName(string saveName) 
     {
         var namesOfSaves = GetNamesofSavesList();
-        if (namesOfSaves.Count == 0)
+        if (namesOfSaves.Count != 0)
         {
             foreach (var name in namesOfSaves)
             {
-                if (name == saveName)
+                if (name.ToLower() == saveName.ToLower())
                 {
                     Debug.Log("not uniqui save name");
                     return false;
@@ -94,9 +90,9 @@ public class SaveSerializable
     List<string> GetNamesofSavesList() 
     {
         var namesOfSaves = new List<string>();
-        foreach (var path in GetAllSavesPath()) 
+        foreach (var file in GetAllSavesFile()) 
         {
-            var nameOfSave = path.Substring(Application.persistentDataPath.Length, path.Length - Application.persistentDataPath.Length - 4);
+            var nameOfSave = file.FullName.Substring(Application.persistentDataPath.Length + 1, file.FullName.Length - Application.persistentDataPath.Length - 5);
             namesOfSaves.Add(nameOfSave);
         }
 
@@ -108,15 +104,15 @@ public class SaveSerializable
         return namesOfSaves;
     }
 
-    List<string> GetAllSavesPath() 
+    public List<FileInfo> GetAllSavesFile() 
     {
-        var path = new List<string>();
+        var path = new List<FileInfo>();
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath);
         foreach (var file in directoryInfo.GetFiles())
         {
-            if (Path.GetExtension(file.FullName) == "dat")
+            if (Path.GetExtension(file.FullName) == ".dat")
             {
-                path.Add(file.FullName);
+                path.Add(file);
             }
         }
         Debug.Log($"we have {path.Count} save");

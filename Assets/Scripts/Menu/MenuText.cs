@@ -8,11 +8,9 @@ public class MenuText : MonoBehaviour
 {
     public Text text;
     public int textId;
-    public int languageID;
 
     void Update()
     {
-        int languageID = LanguageID.languageID;
         string[,] allText = {{"En", "RU", "UA"},
                              {"The session", "Сессия", "Сесія"},
                              {"New Game", "Новая игра", "Нова гра"},
@@ -20,7 +18,12 @@ public class MenuText : MonoBehaviour
                              {"Autors", "Авторы", "Автори" },
                              {"Exit", "Выход", "Вихід" } ,
                              {"Input name for save", "Введите имя для сохранения", "Введіть назву для збереження"},
-                             {"Start new game", "Начать новую игру", "Почати нову гру"} };
-        text.text = allText[textId, languageID];
+                             {"Start new game", "Начать новую игру", "Почати нову гру"} ,
+                             {"Choose one of save","Выберите одно из сохранений","Виберыть одне зі збережень" } ,
+                             {"Save name","Имя сохранения","Ім'я збереження" } ,
+                             {"Save time","Время сохранения","Час збереження" } ,
+                             {"Progress","Прогресс","Прогрес" } ,
+                             {"Choose other name","Выбирите другое имя","Оберіть інше ім'я" } };
+        text.text = allText[textId, LanguageID.languageID];
     }
 }
