@@ -68,10 +68,10 @@
     <Compile Include="Assets\Scripts\Menu\MenuBatton.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuText.cs" />
     <Compile Include="Assets\Scripts\Menu\PlayGame.cs" />
-    <Compile Include="Assets\Scripts\Menu\SaveItem.cs" />
     <Compile Include="Assets\Scripts\Menu\ShowSaves.cs" />
     <Compile Include="Assets\Scripts\Services\LanguageID.cs" />
     <Compile Include="Assets\Scripts\Services\SaveData.cs" />
+    <Compile Include="Assets\Scripts\Services\SceneManager.cs" />
     <Compile Include="Assets\Scripts\Services\Transition.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

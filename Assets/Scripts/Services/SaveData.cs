@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 
-static class SavePlayerData
+public static class SavePlayerData
 {
     static public int LocationID;
     static public int StoryTrigger;
@@ -49,14 +49,12 @@ public class SaveSerializable
         Debug.Log("correct save");
     }
 
-    public void LoadGame(string nameOfSave)
+    public static void LoadGame(string nameOfSave)
     {
         if (File.Exists(Application.persistentDataPath + "/" + nameOfSave + ".dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file =
-              File.Open(Application.persistentDataPath
-              + "/" + nameOfSave + ".dat", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/" + nameOfSave + ".dat", FileMode.Open);
             var data = (SaveSerializable)bf.Deserialize(file);
             file.Close();
             SavePlayerData.LocationID = data.LocationIDToSave;
@@ -69,25 +67,23 @@ public class SaveSerializable
         }
     }
 
-    public bool UniquiSaveName(string saveName) 
+    public static bool UniquiSaveName(string saveName) 
     {
-        var namesOfSaves = GetNamesofSavesList();
+        var namesOfSaves = SaveSerializable.GetNamesofSavesList();
         if (namesOfSaves.Count != 0)
         {
             foreach (var name in namesOfSaves)
             {
                 if (name.ToLower() == saveName.ToLower())
                 {
-                    Debug.Log("not uniqui save name");
                     return false;
                 }
             }
         }
-        Debug.Log("uniqui save name");
         return true;
     }
 
-    List<string> GetNamesofSavesList() 
+    static List<string> GetNamesofSavesList() 
     {
         var namesOfSaves = new List<string>();
         foreach (var file in GetAllSavesFile()) 
@@ -96,11 +92,6 @@ public class SaveSerializable
             namesOfSaves.Add(nameOfSave);
         }
 
-        if (namesOfSaves.Count == 0) 
-        {
-            Debug.Log("zero saves");
-            /*throw new ArgumentNullException("0 Saves");*/
-        }
         return namesOfSaves;
     }
     public static List<string> GetNamesofSavesList(List<FileInfo> fileInfos)
@@ -111,16 +102,10 @@ public class SaveSerializable
             var nameOfSave = file.FullName.Substring(Application.persistentDataPath.Length + 1, file.FullName.Length - Application.persistentDataPath.Length - 5);
             namesOfSaves.Add(nameOfSave);
         }
-
-        if (namesOfSaves.Count == 0)
-        {
-            Debug.Log("zero saves");
-            /*throw new ArgumentNullException("0 Saves");*/
-        }
         return namesOfSaves;
     }
 
-    public List<FileInfo> GetAllSavesFile() 
+    public static List<FileInfo> GetAllSavesFile() 
     {
         var path = new List<FileInfo>();
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath);
@@ -131,7 +116,6 @@ public class SaveSerializable
                 path.Add(file);
             }
         }
-        Debug.Log($"we have {path.Count} save");
         return path;
     }
 

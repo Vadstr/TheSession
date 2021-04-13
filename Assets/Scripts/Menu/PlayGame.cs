@@ -9,7 +9,6 @@ public class PlayGame : MonoBehaviour
     public static IEnumerator CreatNewGame(GameObject allcomponent, GameObject panel)
     {
         SavePlayerData.NameOfSave = null;
-        var transition = new Transition();
         panel.GetComponent<Animator>().SetTrigger("Transition");
         yield return new WaitForSeconds(0.5f);
         allcomponent.gameObject.SetActive(true);
@@ -29,16 +28,15 @@ public class PlayGame : MonoBehaviour
         save.SaveGame();
         panel.GetComponent<Animator>().SetTrigger("Back");
         yield return new WaitForSeconds(0.5f);
-        transition.TransitionToScene(panel, 0);
+        MySceneManager.LoadSceneByNumber(1, panel);
     }
 
     public static IEnumerator ContinueGame(GameObject allcomponent, GameObject panel)
     {
         panel.GetComponent<Animator>().SetTrigger("Transition");
-        var continuePanel = allcomponent.transform.FindChild("ContinuePanel");
+        var continuePanel = allcomponent.transform.Find("ContinuePanel");
         yield return new WaitForSeconds(0.7f);
-        var save = new SaveSerializable();
-        var saves = save.GetAllSavesFile();
+        var saves = SaveSerializable.GetAllSavesFile();
         var sortedListOfSave = new List<FileInfo>();
         if (saves.Count != 0)
         {
@@ -66,10 +64,18 @@ public class PlayGame : MonoBehaviour
                 sortedListOfSave.Add(latestSave);
             }
             ShowSaves.ShowSavesAndData(sortedListOfSave);
-
             continuePanel.GetComponent<Animator>().SetTrigger("Show");
             yield return new WaitForSeconds(0.7f);
             continuePanel.gameObject.SetActive(false);
+            while (SavePlayerData.NameOfSave == null) 
+            {
+                yield return new WaitForSeconds(0.05f);
+            }
+            continuePanel.gameObject.SetActive(true);
+            continuePanel.GetComponent<Animator>().SetTrigger("hight");
+            yield return new WaitForSeconds(0.7f);
+            allcomponent.gameObject.SetActive(false);
+            MySceneManager.LoadSceneByNumber(SavePlayerData.LocationID, panel);
         }
         yield return new WaitForSeconds(0.5f);
     }

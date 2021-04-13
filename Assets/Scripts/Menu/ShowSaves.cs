@@ -22,6 +22,7 @@ public class ShowSaves : MonoBehaviour
         for(int i = 0; i < fileInfos.Count; i++)
         {
             var save = Instantiate(showSavePanel, content.transform);
+            save.name = "save" + Names[i];
             save.transform.localPosition = new Vector3(530, positionOfSavePanel, 0);
             positionOfSavePanel -= 110;
             var SavePanel = save.transform.Find("SavePanel");
@@ -32,9 +33,6 @@ public class ShowSaves : MonoBehaviour
 
             NameText.text = Names[i];
             DateText.text = Dates[i].ToString();
-            
         }
     }
 }
-
-

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class MenuBatton : MonoBehaviour
@@ -23,6 +25,20 @@ public class MenuBatton : MonoBehaviour
         ShowSaves.showSavePanel = showSavePanel;
     }
 
+    public void FixedUpdate()
+    {
+        try
+        {
+            string nameButton = EventSystem.current.currentSelectedGameObject.name;
+            var nameOfSave = nameButton.Substring(4);
+            if (!SaveSerializable.UniquiSaveName(nameOfSave)) 
+            {
+                SaveSerializable.LoadGame(nameOfSave);
+            }
+        }
+        catch { }
+    }
+
     public void NewGame()
     {
         StartCoroutine(PlayGame.CreatNewGame(NewGamePanel, panel));
@@ -35,7 +51,7 @@ public class MenuBatton : MonoBehaviour
 
     public void Authors()
     {
-        StartCoroutine(Autors(new Transition(),new Autors()));
+        StartCoroutine(Autors(new Autors()));
     }
 
     public void Exit()
@@ -46,8 +62,7 @@ public class MenuBatton : MonoBehaviour
 
     public void CreatGame()
     {
-        var save = new SaveSerializable();
-        if (save.UniquiSaveName(NewGameName.text))
+        if (SaveSerializable.UniquiSaveName(NewGameName.text))
         {
             SavePlayerData.NameOfSave = NewGameName.text;
             NewGameName.text = null;
@@ -58,11 +73,6 @@ public class MenuBatton : MonoBehaviour
         }
     }
 
-    public void ChoiseSave() 
-    {
-        
-    }
-
     public void ChangeLanguage() 
     {
         var ID = LanguageID.languageID;
@@ -71,11 +81,11 @@ public class MenuBatton : MonoBehaviour
         languageIdAccessor.SaveLanguageID();
     }
 
-    public IEnumerator Autors(Transition transition, Autors autors) 
+    public IEnumerator Autors(Autors autors) 
     {
-        yield return StartCoroutine(transition.TransitionAnimationFrom(panel));
+        yield return StartCoroutine(Transition.TransitionAnimationFrom(panel));
         yield return StartCoroutine(autors.ShowAutors(autorsText, panel, speed));
-        yield return StartCoroutine(transition.TransitionAnimationBack(panel));
+        yield return StartCoroutine(Transition.TransitionAnimationBack(panel));
     }
 
     public IEnumerator ShowAllert() 
