@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,24 +11,26 @@ public class MenuBatton : MonoBehaviour
     public Text autorsText;
     public Text allertText;
     public int speed = 0;
-    private LanguageIDAccessor languageIdAccessor;
+    public GameObject showSavePanel;
+    public GameObject content;
+    private LanguageIDAccessor languageIdAccessor; 
 
     public void Start()
     {
         languageIdAccessor = new LanguageIDAccessor();
         languageIdAccessor.LoadLanguageID();
+        ShowSaves.content = content;
+        ShowSaves.showSavePanel = showSavePanel;
     }
 
     public void NewGame()
     {
-        var game = new PlayGame();
-        StartCoroutine(game.CreatNewGame(NewGamePanel, panel));
+        StartCoroutine(PlayGame.CreatNewGame(NewGamePanel, panel));
     }
 
     public void ContinueGame()
     {
-        var game = new PlayGame();
-        StartCoroutine(game.ContinueGame(ContinueGamePanel, panel));
+        StartCoroutine(PlayGame.ContinueGame(ContinueGamePanel, panel));
     }
 
     public void Authors()

@@ -103,6 +103,22 @@ public class SaveSerializable
         }
         return namesOfSaves;
     }
+    public static List<string> GetNamesofSavesList(List<FileInfo> fileInfos)
+    {
+        var namesOfSaves = new List<string>();
+        foreach (var file in fileInfos)
+        {
+            var nameOfSave = file.FullName.Substring(Application.persistentDataPath.Length + 1, file.FullName.Length - Application.persistentDataPath.Length - 5);
+            namesOfSaves.Add(nameOfSave);
+        }
+
+        if (namesOfSaves.Count == 0)
+        {
+            Debug.Log("zero saves");
+            /*throw new ArgumentNullException("0 Saves");*/
+        }
+        return namesOfSaves;
+    }
 
     public List<FileInfo> GetAllSavesFile() 
     {
@@ -117,5 +133,22 @@ public class SaveSerializable
         }
         Debug.Log($"we have {path.Count} save");
         return path;
+    }
+
+    public static List<DateTime> GetDateTimesOfLastOpenSaves(List<FileInfo> fileInfos) 
+    {
+        var dateOfSaves = new List<DateTime>();
+        foreach (var file in fileInfos)
+        {
+            var dateOfSave = file.LastWriteTime;
+            dateOfSaves.Add(dateOfSave);
+        }
+
+        if (dateOfSaves.Count == 0)
+        {
+            Debug.Log("zero saves");
+            /*throw new ArgumentNullException("0 Saves");*/
+        }
+        return dateOfSaves;
     }
 }

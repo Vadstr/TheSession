@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayGame : MonoBehaviour
 {
-    public IEnumerator CreatNewGame(GameObject allcomponent, GameObject panel)
+    public static IEnumerator CreatNewGame(GameObject allcomponent, GameObject panel)
     {
         SavePlayerData.NameOfSave = null;
         var transition = new Transition();
@@ -32,33 +32,45 @@ public class PlayGame : MonoBehaviour
         transition.TransitionToScene(panel, 0);
     }
 
-    public IEnumerator ContinueGame(GameObject allcomponent, GameObject panel)
+    public static IEnumerator ContinueGame(GameObject allcomponent, GameObject panel)
     {
         panel.GetComponent<Animator>().SetTrigger("Transition");
-        yield return new WaitForSeconds(0.5f);
+        var continuePanel = allcomponent.transform.FindChild("ContinuePanel");
+        yield return new WaitForSeconds(0.7f);
         var save = new SaveSerializable();
         var saves = save.GetAllSavesFile();
+        var sortedListOfSave = new List<FileInfo>();
         if (saves.Count != 0)
         {
-            allcomponent.gameObject.SetActive(true);
-            var sortedListOfSave = new List<FileInfo>();
-            for (int i = 0; i < saves.Count; i++)
+            allcomponent.gameObject.SetActive(true); 
+            for (int i = saves.Count; i > 0 ; i--)
             {
                 FileInfo latestSave = null;
-                for (int j = i; j < saves.Count; j++)
+                for (int j = 0; j < saves.Count; j++)
                 {
                     if (latestSave == null)
                     {
                         latestSave = saves[j];
                     }
-                    else if (File.GetLastWriteTime(latestSave.FullName) < File.GetLastWriteTime(saves[j].FullName)) 
+                    else if (latestSave.LastWriteTime < saves[j].LastWriteTime) 
                     {
                         latestSave = saves[j];
                     }
                 }
+
+                for (int j = 0; j < saves.Count; j++) 
+                {
+                    if (latestSave.Name == saves[j].Name)
+                        saves.Remove(saves[j]);
+                } 
                 sortedListOfSave.Add(latestSave);
             }
             ShowSaves.ShowSavesAndData(sortedListOfSave);
+
+            continuePanel.GetComponent<Animator>().SetTrigger("Show");
+            yield return new WaitForSeconds(0.7f);
+            continuePanel.gameObject.SetActive(false);
         }
+        yield return new WaitForSeconds(0.5f);
     }
 }
