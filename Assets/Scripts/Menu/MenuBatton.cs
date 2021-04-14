@@ -29,11 +29,14 @@ public class MenuBatton : MonoBehaviour
         try
         {
             string nameButton = EventSystem.current.currentSelectedGameObject.name;
-            var nameOfSave = nameButton.Substring(4);
-            if (!SaveSerializable.UniquiSaveName(nameOfSave)) 
+            if (nameButton.Contains("save"))
             {
-                SaveSerializable.LoadGame(nameOfSave);
-                nameOfSave = null;
+                var nameOfSave = nameButton.Substring(4);
+                if (!SaveSerializable.UniquiSaveName(nameOfSave))
+                {
+                    SaveSerializable.LoadGame(nameOfSave);
+                    nameButton = null;
+                }
             }
         }
         catch { }
