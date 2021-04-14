@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MySceneManager : MonoBehaviour
+public static class MySceneManager
 {
-    static short currentScene;
-    static short loadScene;
-
-    public static void LoadSceneByNumber(int scenNumber,GameObject panel) 
+    public static void LoadSceneByNumber(int scenNumber) 
     {
-        SavePlayerData.LocationID = scenNumber;
-        new SaveSerializable().SaveGame();
-        panel.GetComponent<Animator>().SetTrigger("Transition");
+        Transition.TransitionAnimationFrom();
         Debug.Log("Correct load scene");
         SceneManager.LoadScene(scenNumber);
+    }
+
+    public static void LoadScene()
+    {
+        SavePlayerData.LocationID = SceneManager.GetActiveScene().buildIndex;
+        new SaveSerializable().SaveGame();
+        Transition.TransitionAnimationBack();
     }
 }

@@ -1,20 +1,25 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Transition : MonoBehaviour
 {
-    public static IEnumerator TransitionAnimationFrom(GameObject panel) 
+    public static GameObject darkPanelForTransition;
+    public GameObject panel;
+
+    private void Start()
     {
-        panel.GetComponent<Animator>().SetTrigger("Transition");
-        yield return new WaitForSeconds(0.5f);
+        darkPanelForTransition = panel;
+        TransitionAnimationBack();
     }
 
-    public static IEnumerator TransitionAnimationBack(GameObject panel)
+    public static void TransitionAnimationFrom() 
     {
-        panel.GetComponent<Animator>().SetTrigger("Back");
+        darkPanelForTransition.GetComponent<Animator>().SetTrigger("Transition");
+    }
+
+    public static IEnumerator TransitionAnimationBack()
+    {
+        darkPanelForTransition.GetComponent<Animator>().SetTrigger("Back");
         yield return new WaitForSeconds(0.5f);
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class MenuBatton : MonoBehaviour
 {
-    public GameObject panel;
     public GameObject NewGamePanel;
     public GameObject ContinueGamePanel;
     public InputField NewGameName;
@@ -34,6 +33,7 @@ public class MenuBatton : MonoBehaviour
             if (!SaveSerializable.UniquiSaveName(nameOfSave)) 
             {
                 SaveSerializable.LoadGame(nameOfSave);
+                nameOfSave = null;
             }
         }
         catch { }
@@ -41,12 +41,12 @@ public class MenuBatton : MonoBehaviour
 
     public void NewGame()
     {
-        StartCoroutine(PlayGame.CreatNewGame(NewGamePanel, panel));
+        StartCoroutine(PlayGame.CreatNewGame(NewGamePanel));
     }
 
     public void ContinueGame()
     {
-        StartCoroutine(PlayGame.ContinueGame(ContinueGamePanel, panel));
+        StartCoroutine(PlayGame.ContinueGame(ContinueGamePanel));
     }
 
     public void Authors()
@@ -56,7 +56,7 @@ public class MenuBatton : MonoBehaviour
 
     public void Exit()
     {
-        panel.GetComponent<Animator>().SetTrigger("Transition");
+        Transition.TransitionAnimationFrom();
         Application.Quit();
     }
 
@@ -83,9 +83,9 @@ public class MenuBatton : MonoBehaviour
 
     public IEnumerator Autors(Autors autors) 
     {
-        yield return StartCoroutine(Transition.TransitionAnimationFrom(panel));
-        yield return StartCoroutine(autors.ShowAutors(autorsText, panel, speed));
-        yield return StartCoroutine(Transition.TransitionAnimationBack(panel));
+        Transition.TransitionAnimationFrom();
+        yield return StartCoroutine(autors.ShowAutors(autorsText, speed));
+        yield return StartCoroutine(Transition.TransitionAnimationBack());
     }
 
     public IEnumerator ShowAllert() 
