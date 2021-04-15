@@ -22,6 +22,7 @@ public class MenuBatton : MonoBehaviour
         languageIdAccessor.LoadLanguageID();
         ShowSaves.content = content;
         ShowSaves.showSavePanel = showSavePanel;
+        SavePlayerData.NameOfSave = null;
     }
 
     public void FixedUpdate()
