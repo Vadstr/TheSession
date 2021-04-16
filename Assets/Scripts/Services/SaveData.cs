@@ -69,7 +69,7 @@ public class SaveSerializable
 
     public static bool UniquiSaveName(string saveName) 
     {
-        var namesOfSaves = SaveSerializable.GetNamesofSavesList();
+        var namesOfSaves = GetNamesofSavesList();
         if (namesOfSaves.Count != 0)
         {
             foreach (var name in namesOfSaves)
@@ -94,6 +94,7 @@ public class SaveSerializable
 
         return namesOfSaves;
     }
+
     public static List<string> GetNamesofSavesList(List<FileInfo> fileInfos)
     {
         var namesOfSaves = new List<string>();
