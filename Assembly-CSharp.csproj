@@ -69,12 +69,12 @@
     <Compile Include="Assets\Scripts\Menu\MenuText.cs" />
     <Compile Include="Assets\Scripts\Menu\PlayGame.cs" />
     <Compile Include="Assets\Scripts\Menu\ShowSaves.cs" />
-    <Compile Include="Assets\Scripts\Services\LanguageID.cs" />
-    <Compile Include="Assets\Scripts\Services\MovingBetweenRooms.cs" />
-    <Compile Include="Assets\Scripts\Services\PlayerMoov.cs" />
-    <Compile Include="Assets\Scripts\Services\SaveData.cs" />
-    <Compile Include="Assets\Scripts\Services\SceneManager.cs" />
-    <Compile Include="Assets\Scripts\Services\Transition.cs" />
+    <Compile Include="Assets\Scripts\Services\Player\PlayerMoov.cs" />
+    <Compile Include="Assets\Scripts\Services\Save\LanguageID.cs" />
+    <Compile Include="Assets\Scripts\Services\Save\SaveData.cs" />
+    <Compile Include="Assets\Scripts\Services\SceneChange\MovingBetweenRooms.cs" />
+    <Compile Include="Assets\Scripts\Services\SceneChange\SceneManager.cs" />
+    <Compile Include="Assets\Scripts\Services\SceneChange\Transition.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
