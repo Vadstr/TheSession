@@ -70,6 +70,8 @@
     <Compile Include="Assets\Scripts\Menu\PlayGame.cs" />
     <Compile Include="Assets\Scripts\Menu\ShowSaves.cs" />
     <Compile Include="Assets\Scripts\Services\LanguageID.cs" />
+    <Compile Include="Assets\Scripts\Services\MovingBetweenRooms.cs" />
+    <Compile Include="Assets\Scripts\Services\PlayerMoov.cs" />
     <Compile Include="Assets\Scripts\Services\SaveData.cs" />
     <Compile Include="Assets\Scripts\Services\SceneManager.cs" />
     <Compile Include="Assets\Scripts\Services\Transition.cs" />

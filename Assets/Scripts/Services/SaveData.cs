@@ -11,8 +11,7 @@ public static class SavePlayerData
     static public int LocationID;
     static public int StoryTrigger;
     static public List<float> OtherCaracteristics;
-    static public float CoordinateOnSceneX;
-    static public float CoordinateOnSceneY;
+    static public Vector3 CoordinateOnScene;
     static public string NameOfSave;
 }
 
@@ -22,16 +21,14 @@ public class SaveSerializable
     int LocationIDToSave;
     int StoryTriggerToSave;
     List<float> OtherCaracteristicsToSave;
-    float CoordinateOnSceneXToSave;
-    float CoordinateOnSceneYToSave;
+    Vector3 CoordinateOnSceneToSave;
 
     public SaveSerializable()
     {
         LocationIDToSave = 0;
         StoryTriggerToSave = 0;
         OtherCaracteristicsToSave = new List<float>();
-        CoordinateOnSceneXToSave = 0;
-        CoordinateOnSceneYToSave = 0;
+        CoordinateOnSceneToSave = new Vector3();
     }
 
     public void SaveGame()
@@ -42,8 +39,7 @@ public class SaveSerializable
         LocationIDToSave = SavePlayerData.LocationID;
         StoryTriggerToSave = SavePlayerData.StoryTrigger;
         OtherCaracteristicsToSave = SavePlayerData.OtherCaracteristics;
-        CoordinateOnSceneXToSave = SavePlayerData.CoordinateOnSceneX;
-        CoordinateOnSceneYToSave = SavePlayerData.CoordinateOnSceneY;
+        CoordinateOnSceneToSave = SavePlayerData.CoordinateOnScene;
         bf.Serialize(file, this);
         file.Close();
         Debug.Log("correct save");
@@ -60,8 +56,7 @@ public class SaveSerializable
             SavePlayerData.LocationID = data.LocationIDToSave;
             SavePlayerData.StoryTrigger = data.StoryTriggerToSave;
             SavePlayerData.OtherCaracteristics = data.OtherCaracteristicsToSave;
-            SavePlayerData.CoordinateOnSceneX = data.CoordinateOnSceneXToSave;
-            SavePlayerData.CoordinateOnSceneY = data.CoordinateOnSceneYToSave;
+            SavePlayerData.CoordinateOnScene = data.CoordinateOnSceneToSave;
             SavePlayerData.NameOfSave = nameOfSave;
             Debug.Log("correct load");
         }
