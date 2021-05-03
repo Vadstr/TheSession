@@ -6,48 +6,31 @@ using UnityEngine.SceneManagement;
 public class PlayerMoov : MonoBehaviour
 {
     public GameObject Player;
-    public Vector2 Vect;
-    const int speed = 5;
+    public int speedH = 450;
+    public int speedV = 250;
     public string Playertag;
+    private Rigidbody2D rb;
 
+    private static float positionZ;
+    public static float horizontal;
+    public static float vertical;
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+        positionZ = 90;
         loadPosition();
-        Application.targetFrameRate = 60;
-
+        Application.targetFrameRate = 200;
     }
 
     private void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.R))
-            savePosition();
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            loadPosition();
-        }
-
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
-            Player.transform.Translate(Vector2.up * speed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            Player.transform.Translate(Vector2.down * speed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            Player.transform.Translate(Vector2.left * speed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            Player.transform.Translate(Vector2.right * speed * Time.deltaTime);
-        }
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+        var position = Player.transform.position;/*
+        Player.transform.position = new Vector3(horizontal * speed * Time.deltaTime + position.x, vertical * speed * Time.deltaTime + position.y, 90);*/
+        Player.transform.position = new Vector3(position.x, position.y, positionZ);
+        rb.velocity = new Vector3(horizontal * speedH * Time.deltaTime, vertical * speedV * Time.deltaTime);
     }
 
     public void savePosition()
@@ -64,14 +47,6 @@ public class PlayerMoov : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D Other)
     {
-        if (Other.tag == Playertag)
-        {
-            if (Input.GetKey(KeyCode.E))
-            {
-                savePosition();
-
-
-            }
-        }
+        Debug.Log("On triger");
     }
 }

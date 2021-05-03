@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Menu\MenuText.cs" />
     <Compile Include="Assets\Scripts\Menu\PlayGame.cs" />
     <Compile Include="Assets\Scripts\Menu\ShowSaves.cs" />
+    <Compile Include="Assets\Scripts\Services\Player\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Services\Player\PlayerMoov.cs" />
     <Compile Include="Assets\Scripts\Services\Save\LanguageID.cs" />
     <Compile Include="Assets\Scripts\Services\Save\SaveData.cs" />
