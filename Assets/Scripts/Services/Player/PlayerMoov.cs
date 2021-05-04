@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMoov : MonoBehaviour
 {
+    public GameObject Hint;
     public GameObject Player;
     public int speedH = 450;
     public int speedV = 250;
     public string Playertag;
-    private Rigidbody2D rb;
 
+    private Rigidbody2D rb;
+    private GameObject hint;
     private static float positionZ;
     public static float horizontal;
     public static float vertical;
@@ -45,8 +48,37 @@ public class PlayerMoov : MonoBehaviour
         CurrentPlayerPosition.position = SavePlayerData.CoordinateOnScene;
     }
 
-    private void OnTriggerStay2D(Collider2D Other)
+    private void OnTriggerEnter2D(Collider2D Other)
     {
-        Debug.Log("On triger");
+        hint = Instantiate(Hint, GetComponent<Transform>());
+        hint.transform.localScale = new Vector3(0.001f,0.001f,0.001f);
+        var yPoz = Player.transform.position.y + 1.5f;
+        var xPoz = Player.transform.position.x;
+        if (Camera.main.transform.position.x > xPoz)
+        {
+            xPoz += 3f;
+        }
+        else 
+        {
+            xPoz -= 3f;
+        }
+        hint.transform.position = new Vector3(xPoz, yPoz, positionZ);
+        var textHintButton = hint.GetComponentInChildren<Text>();
+        var textHintText = hint.transform.Find("HintText").GetComponent<Text>();
+        var textTrigger = Other.GetComponent<Text>();
+        textHintButton.text = textTrigger.text.Substring(0,1);
+        textHintText.text = textTrigger.text.Substring(3);
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetAxis("Accept") != 0)
+        {
+            Debug.Log("maria loh");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Destroy(hint);
     }
 }

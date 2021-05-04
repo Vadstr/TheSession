@@ -117,8 +117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578fcf003ef8d90458f7e488345ebd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hint: {fileID: 3035348518279239274, guid: caf040989c0113e449ec91a04aecc502, type: 3}
   Player: {fileID: 7964570279965898828}
-  speed: 450
+  speedH: 450
+  speedV: 250
   Playertag: Player
 --- !u!114 &5303478610968789030
 MonoBehaviour:
