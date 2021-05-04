@@ -19,13 +19,53 @@ public class RoomsTransition : MonoBehaviour
     public AnimationClip openDoor;
     public static AnimationClip OpenDoor;
     public static GameObject[] Doors;
+    public static GameObject Hallway;
 
     private void Start()
     {
         Doors = doors;
+        Hallway = hallway;
     }
 
-    public static IEnumerator TransitionAnimationBack(Collider2D doorPlace)
+    public static IEnumerator OpenNearestDoor(Collider2D doorPlace)
+    {
+        Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door", true);
+        yield return new WaitForEndOfFrame();
+    }
+
+    public static IEnumerator CloseDoor(Collider2D doorPlace)
+    {
+        Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door", false);
+        yield return new WaitForEndOfFrame();
+    }
+
+    public static IEnumerator MoovCamera(string locationName) 
+    {
+        var trigerName = "To" + locationName;
+        Camera.main.GetComponent<Animator>().SetBool(trigerName, true);
+        yield return new WaitForSeconds(0.5f);
+        Camera.main.GetComponent<Animator>().SetBool(trigerName, false);
+    }
+
+    public static IEnumerator HideAndShowHallway(string locationName) 
+    {
+        var trigerName = "To" + locationName;
+        if (trigerName != "Tohallway")
+        {
+            Hallway.GetComponent<Animator>().SetBool("FromHallway", true);
+            yield return new WaitForSeconds(0.5f);
+            Hallway.GetComponent<Animator>().SetBool("FromHallway", false);
+        }
+        else
+        {
+            Hallway.GetComponent<Animator>().SetBool("ToHallway", true);
+            yield return new WaitForSeconds(0.5f);
+            Hallway.GetComponent<Animator>().SetBool("ToHallway", false);
+        }
+    }
+
+
+    public static int NearestDoor(Collider2D doorPlace)
     {
         var nearestDoor = new int();
         var shortestDistance = float.MaxValue;
@@ -40,12 +80,6 @@ public class RoomsTransition : MonoBehaviour
                 shortestDistance = distance;
             }
         }
-
-        Doors[nearestDoor].GetComponent<Animator>().SetTrigger("open door");
-        doorPlace.gameObject.SetActive(false);
-        yield return new WaitForSeconds(1.5f);
-        doorPlace.gameObject.SetActive(true);
-        Doors[nearestDoor].GetComponent<Animator>().SetTrigger("close door");
-
+        return nearestDoor;
     }
 }

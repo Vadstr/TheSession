@@ -415,6 +415,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4031448175896117376}
   - component: {fileID: 5956098777563652482}
+  - component: {fileID: 1971358364528539293}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -431,7 +432,7 @@ Transform:
   m_GameObject: {fileID: 7546916718264218912}
   m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1000, y: 1000, z: 1000}
+  m_LocalScale: {x: 1, y: 1.15, z: 1}
   m_Children:
   - {fileID: 6036258799553280221}
   - {fileID: 4882936257507823162}
@@ -460,3 +461,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!68 &1971358364528539293
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7546916718264218912}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0.01
+  m_Points:
+  - {x: -0.27, y: -0.26}
+  - {x: 0, y: -0.26}

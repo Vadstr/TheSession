@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1781826902164939433}
   - component: {fileID: 5303478610968789030}
   - component: {fileID: 2847224700104850658}
-  - component: {fileID: 95586036844261468}
+  - component: {fileID: 4683514794977059833}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -121,7 +121,6 @@ MonoBehaviour:
   Player: {fileID: 7964570279965898828}
   speedH: 450
   speedV: 250
-  Playertag: Player
 --- !u!114 &5303478610968789030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.17068665, y: 0.04576388}
   m_EdgeRadius: 0
---- !u!50 &95586036844261468
+--- !u!50 &4683514794977059833
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -174,10 +173,10 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

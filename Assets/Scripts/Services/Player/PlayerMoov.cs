@@ -14,15 +14,15 @@ public class PlayerMoov : MonoBehaviour
     private Rigidbody2D rb;
     private GameObject hint;
     private bool animate = false;
-    private float positionZ;
+    private float yPozFromPrevFrame;
     public static float horizontal;
     public static float vertical;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        positionZ = 90;
-        loadPosition();
+        yPozFromPrevFrame = Player.transform.position.y;
+        loadPosition(); 
         Application.targetFrameRate = 200;
     }
 
@@ -32,8 +32,14 @@ public class PlayerMoov : MonoBehaviour
         vertical = Input.GetAxis("Vertical");
         var position = Player.transform.position;/*
         Player.transform.position = new Vector3(horizontal * speed * Time.deltaTime + position.x, vertical * speed * Time.deltaTime + position.y, 90);*/
-        Player.transform.position = new Vector3(position.x, position.y, positionZ);
+
         rb.velocity = new Vector3(horizontal * speedH * Time.deltaTime, vertical * speedV * Time.deltaTime);
+        Player.transform.position = new Vector3(position.x, position.y, position.y + 83.5f);
+        yPozFromPrevFrame = position.y;
+        if (Input.GetAxis("Save") != 0 )
+        {
+            savePosition();
+        }
     }
 
     public void savePosition()
@@ -63,19 +69,19 @@ public class PlayerMoov : MonoBehaviour
             xPoz -= 3f;
         }
 
-        hint.transform.position = new Vector3(xPoz, yPoz, positionZ);
+        hint.transform.position = new Vector3(xPoz, yPoz, Player.transform.position.z);
         var textHintButton = hint.GetComponentInChildren<Text>();
         var textHintText = hint.transform.Find("HintText").GetComponent<Text>();
         var textTrigger = Other.GetComponent<Text>().text.Split('.');
 
         int index;
-        if (Other.transform.position.y < GetComponent<Transform>().position.y)
+        if (Other.transform.position.y > GetComponent<Transform>().position.y)
         {
-            index = 1;
+            index = 0;
         }
         else 
         {
-            index = 0;
+            index = 1;
         }
         textHintButton.text = textTrigger[index].Substring(0,1);
         textHintText.text = textTrigger[index].Substring(3);
@@ -85,18 +91,45 @@ public class PlayerMoov : MonoBehaviour
         if (Input.GetAxis("Accept") != 0 && animate == false)
         {
             animate = true;
-            StartCoroutine(RoomsTransition.TransitionAnimationBack(collision));
+            Destroy(hint);
+            StartCoroutine(RoomsTransition.OpenNearestDoor(collision));
+
+            if (collision.transform.position.y < GetComponent<Transform>().position.y)
+            {
+                var textTrigger = collision.GetComponent<Text>().text.Split('.');
+                var locationName = textTrigger[1].Substring(9);
+                StartCoroutine(RoomsTransition.HideAndShowHallway(locationName));
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Destroy(hint);
-        animate = false;
-    }
+        StartCoroutine(RoomsTransition.CloseDoor(collision));
 
-    private IEnumerator TransitionAnimation(GameObject player, GameObject camera, Collider2D Other, GameObject door) 
-    {
-        yield return new WaitForSeconds(0.5f);
+        int index;
+        if (collision.transform.position.y < GetComponent<Transform>().position.y)
+        {
+            index = 0;
+        }
+        else
+        {
+            index = 1;
+        }
+
+        var textTrigger = collision.GetComponent<Text>().text.Split('.');
+        var locationName = textTrigger[index].Substring(9);
+        StartCoroutine(RoomsTransition.MoovCamera(locationName));
+        if (locationName != "hallway")
+        {
+            StartCoroutine(RoomsTransition.HideAndShowHallway(locationName));
+        }
+
+        animate = false;
+        try
+        {
+            Destroy(hint);
+        }
+        catch { }
     }
 }

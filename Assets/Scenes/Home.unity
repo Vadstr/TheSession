@@ -130,7 +130,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 83435333}
-  - component: {fileID: 83435330}
   - component: {fileID: 83435329}
   - component: {fileID: 83435332}
   - component: {fileID: 83435331}
@@ -154,7 +153,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.62501, y: -2.1711507}
+  m_Offset: {x: -2.841405, y: -2.3631206}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -165,26 +164,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.6986094, y: 1.4661226}
+  m_Size: {x: 4.131399, y: 2.4752932}
   m_EdgeRadius: 0
---- !u!68 &83435330
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83435328}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0.1
-  m_Points:
-  - {x: -3.9591222, y: -2.158885}
-  - {x: -1.4842336, y: -2.1588848}
 --- !u!114 &83435331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,9 +198,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'E, Go to room.
-
-    E, Go to hallway'
+  m_Text: E, Go to room.E, Go to hallway
 --- !u!222 &83435332
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -244,7 +223,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.02, y: 0.9526135}
+  m_AnchoredPosition: {x: 9.02, y: 0.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &94709466
@@ -510,10 +489,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 799583825192439054}
     m_Modifications:
+    - target: {fileID: 1971358364528539293, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
+        type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4031448175896117376, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.13000001
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 4031448175896117376, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
         type: 3}
@@ -523,7 +507,7 @@ PrefabInstance:
     - target: {fileID: 4031448175896117376, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0925926
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4031448175896117376, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
         type: 3}
@@ -698,6 +682,7 @@ GameObject:
   - component: {fileID: 337673912}
   - component: {fileID: 337673911}
   - component: {fileID: 337673910}
+  - component: {fileID: 337673914}
   m_Layer: 5
   m_Name: Hallway
   m_TagString: Untagged
@@ -773,7 +758,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337673909}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 91}
+  m_LocalPosition: {x: 0, y: 0, z: 84.1}
   m_LocalScale: {x: 0.009259259, y: 0.009259259, z: 0.009259259}
   m_Children:
   - {fileID: 1285648891}
@@ -785,6 +770,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920.0001, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &337673914
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337673909}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b1600272b88adec4c8bf3e1f73bd1a7f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &404640659
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +874,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03576207, y: -0.14304686}
+  m_Offset: {x: 0.03576207, y: -0.1718998}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -881,8 +885,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9425111, y: 0.38562393}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.48086977, y: 0.15480328}
+  m_EdgeRadius: 0.2
 --- !u!50 &530606408
 Rigidbody2D:
   serializedVersion: 4
@@ -1017,7 +1021,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08344436, y: -0.1311264}
+  m_Offset: {x: 0.040165424, y: -0.21768427}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1028,8 +1032,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0378757, y: 0.55251217}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.5473814, y: 0.37939644}
+  m_EdgeRadius: 0.2
 --- !u!50 &583077764
 Rigidbody2D:
   serializedVersion: 4
@@ -1107,7 +1111,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14304721, y: -0.119205475}
+  m_Offset: {x: -0.14304733, y: -0.16248465}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1118,8 +1122,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1809876, y: 0.4809885}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.8347564, y: 0.2790203}
+  m_EdgeRadius: 0.2
 --- !u!50 &792879360
 Rigidbody2D:
   serializedVersion: 4
@@ -1331,7 +1335,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1668886, y: -0.035761833}
+  m_Offset: {x: -0.12360966, y: -0.050188065}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1342,8 +1346,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1333048, y: 0.55251074}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.93133664, y: 0.29283857}
+  m_EdgeRadius: 0.2
 --- !u!50 &1024322289
 Rigidbody2D:
   serializedVersion: 4
@@ -1619,16 +1623,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 95586036844261468, guid: bdbf98331374bb6489be5fa278db117b,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 95586036844261468, guid: bdbf98331374bb6489be5fa278db117b,
-        type: 3}
-      propertyPath: m_AngularDrag
-      value: 0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 1781826902164939433, guid: bdbf98331374bb6489be5fa278db117b,
         type: 3}
       propertyPath: Rooms.Array.size
@@ -1649,15 +1643,40 @@ PrefabInstance:
       propertyPath: Rooms.Array.data[2]
       value: 
       objectReference: {fileID: 1426827117}
+    - target: {fileID: 2847224700104850658, guid: bdbf98331374bb6489be5fa278db117b,
+        type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847224700104850658, guid: bdbf98331374bb6489be5fa278db117b,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.17310482
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847224700104850658, guid: bdbf98331374bb6489be5fa278db117b,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.0062320232
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847224700104850658, guid: bdbf98331374bb6489be5fa278db117b,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.011034241
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847224700104850658, guid: bdbf98331374bb6489be5fa278db117b,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.13105483
+      objectReference: {fileID: 0}
     - target: {fileID: 6713413350861251682, guid: bdbf98331374bb6489be5fa278db117b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -6.54
       objectReference: {fileID: 0}
     - target: {fileID: 6713413350861251682, guid: bdbf98331374bb6489be5fa278db117b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 6713413350861251682, guid: bdbf98331374bb6489be5fa278db117b,
         type: 3}
@@ -2577,7 +2596,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1879302761}
-  - component: {fileID: 1879302758}
   - component: {fileID: 1879302757}
   - component: {fileID: 1879302760}
   - component: {fileID: 1879302759}
@@ -2601,7 +2619,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.62501, y: -2.1711507}
+  m_Offset: {x: -2.701877, y: -2.3523402}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2612,26 +2630,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.6986094, y: 1.4661226}
+  m_Size: {x: 3.8523436, y: 2.3286867}
   m_EdgeRadius: 0
---- !u!68 &1879302758
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1879302756}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0.1
-  m_Points:
-  - {x: -3.9591222, y: -2.158885}
-  - {x: -1.4842336, y: -2.1588848}
 --- !u!114 &1879302759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2664,9 +2664,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'E, Go to kitchen.
-
-    E, Go to hallway'
+  m_Text: E, Go to kitchen.E, Go to hallway
 --- !u!222 &1879302760
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2691,7 +2689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.2364867, y: 0.9526135}
+  m_AnchoredPosition: {x: -3.2364867, y: 0.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1920067232
@@ -2796,6 +2794,7 @@ GameObject:
   - component: {fileID: 1944420063}
   - component: {fileID: 1944420062}
   - component: {fileID: 1944420065}
+  - component: {fileID: 1944420066}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2862,7 +2861,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1944420061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -49.2}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 111842095}
@@ -2889,7 +2888,26 @@ MonoBehaviour:
   - {fileID: 1129366975}
   - {fileID: 1849731237}
   - {fileID: 692549164}
-  openDoor: {fileID: 7400000, guid: 786b4af032266f94fb14598a5e7f006a, type: 2}
+  openDoor: {fileID: 7400000, guid: e1d887c044a4e384fac90383898075e6, type: 2}
+--- !u!95 &1944420066
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944420061}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 077bce3763a291241a142d0a866ed3b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1945529389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2983,6 +3001,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: doorCaseKitchen
       objectReference: {fileID: 0}
+    - target: {fileID: 4425977720378646368, guid: 699c300e73b29cb438f6ad3581a439e5,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8597628385759513942, guid: 699c300e73b29cb438f6ad3581a439e5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2996,7 +3019,7 @@ PrefabInstance:
     - target: {fileID: 8597628385759513942, guid: 699c300e73b29cb438f6ad3581a439e5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -124
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8597628385759513942, guid: 699c300e73b29cb438f6ad3581a439e5,
         type: 3}
