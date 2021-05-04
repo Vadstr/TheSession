@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class PlayGame : MonoBehaviour
 {
-    public static IEnumerator CreatNewGame(GameObject allcomponent, GameObject panel)
+    public static IEnumerator CreatNewGame(GameObject allcomponent)
     {
         SavePlayerData.NameOfSave = null;
-        panel.GetComponent<Animator>().SetTrigger("Transition");
+        Transition.TransitionAnimationFrom();
         yield return new WaitForSeconds(0.5f);
         allcomponent.gameObject.SetActive(true);
         while (true) 
@@ -26,14 +26,14 @@ public class PlayGame : MonoBehaviour
         var save = new SaveSerializable();
         allcomponent.gameObject.SetActive(false);
         save.SaveGame();
-        panel.GetComponent<Animator>().SetTrigger("Back");
+        Transition.TransitionAnimationBack();
         yield return new WaitForSeconds(0.5f);
-        MySceneManager.LoadSceneByNumber(1, panel);
+        MySceneManager.LoadSceneByNumber(1);
     }
 
-    public static IEnumerator ContinueGame(GameObject allcomponent, GameObject panel)
+    public static IEnumerator ContinueGame(GameObject allcomponent)
     {
-        panel.GetComponent<Animator>().SetTrigger("Transition");
+        Transition.TransitionAnimationFrom();
         var continuePanel = allcomponent.transform.Find("ContinuePanel");
         yield return new WaitForSeconds(0.7f);
         var saves = SaveSerializable.GetAllSavesFile();
@@ -75,7 +75,7 @@ public class PlayGame : MonoBehaviour
             continuePanel.GetComponent<Animator>().SetTrigger("hight");
             yield return new WaitForSeconds(0.7f);
             allcomponent.gameObject.SetActive(false);
-            MySceneManager.LoadSceneByNumber(SavePlayerData.LocationID, panel);
+            MySceneManager.LoadSceneByNumber(SavePlayerData.LocationID);
         }
         yield return new WaitForSeconds(0.5f);
     }

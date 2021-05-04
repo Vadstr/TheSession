@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Autors : MonoBehaviour
 {
 
-    public IEnumerator ShowAutors(Text autors, GameObject panel, int speed)
+    public IEnumerator ShowAutors(Text autors, int speed)
     {
         autors.gameObject.SetActive(true);
         autors.text = GetAutors();
