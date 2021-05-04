@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Home\RoomsTransition.cs" />
     <Compile Include="Assets\Scripts\Menu\Autors.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuBatton.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuText.cs" />

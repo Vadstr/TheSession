@@ -10,12 +10,11 @@ public class PlayerMoov : MonoBehaviour
     public GameObject Player;
     public int speedH = 450;
     public int speedV = 250;
-    public string Playertag;
 
     private Rigidbody2D rb;
     private GameObject hint;
     private bool animate = false;
-    private static float positionZ;
+    private float positionZ;
     public static float horizontal;
     public static float vertical;
 
@@ -63,19 +62,30 @@ public class PlayerMoov : MonoBehaviour
         {
             xPoz -= 3f;
         }
+
         hint.transform.position = new Vector3(xPoz, yPoz, positionZ);
         var textHintButton = hint.GetComponentInChildren<Text>();
         var textHintText = hint.transform.Find("HintText").GetComponent<Text>();
-        var textTrigger = Other.GetComponent<Text>();
-        textHintButton.text = textTrigger.text.Substring(0,1);
-        textHintText.text = textTrigger.text.Substring(3);
+        var textTrigger = Other.GetComponent<Text>().text.Split('.');
+
+        int index;
+        if (Other.transform.position.y < GetComponent<Transform>().position.y)
+        {
+            index = 1;
+        }
+        else 
+        {
+            index = 0;
+        }
+        textHintButton.text = textTrigger[index].Substring(0,1);
+        textHintText.text = textTrigger[index].Substring(3);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (Input.GetAxis("Accept") != 0 && animate == false)
         {
             animate = true;
-            Debug.Log("maria loh");
+            StartCoroutine(RoomsTransition.TransitionAnimationBack(collision));
         }
     }
 
@@ -83,5 +93,10 @@ public class PlayerMoov : MonoBehaviour
     {
         Destroy(hint);
         animate = false;
+    }
+
+    private IEnumerator TransitionAnimation(GameObject player, GameObject camera, Collider2D Other, GameObject door) 
+    {
+        yield return new WaitForSeconds(0.5f);
     }
 }

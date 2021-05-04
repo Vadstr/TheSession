@@ -217,7 +217,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: E, go to room
+  m_Text: 'E, Go to room.
+
+    E, Go to hallway'
 --- !u!222 &83435332
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -546,7 +548,7 @@ PrefabInstance:
     - target: {fileID: 4031448175896117376, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4031448175896117376, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
         type: 3}
@@ -1080,6 +1082,12 @@ Transform:
   m_Father: {fileID: 1143453761}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -20}
+--- !u!1 &692549164 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7546916718264218912, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1920067232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &792879357 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1857656746635308263, guid: e7ad56dfeb850a8458924b39e76a9837,
@@ -1357,6 +1365,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!1 &1129366975 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7546916718264218912, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 291529376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1143453760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,6 +1629,26 @@ PrefabInstance:
       propertyPath: m_AngularDrag
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 1781826902164939433, guid: bdbf98331374bb6489be5fa278db117b,
+        type: 3}
+      propertyPath: Rooms.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781826902164939433, guid: bdbf98331374bb6489be5fa278db117b,
+        type: 3}
+      propertyPath: Rooms.Array.data[0]
+      value: 
+      objectReference: {fileID: 337673909}
+    - target: {fileID: 1781826902164939433, guid: bdbf98331374bb6489be5fa278db117b,
+        type: 3}
+      propertyPath: Rooms.Array.data[1]
+      value: 
+      objectReference: {fileID: 316422815}
+    - target: {fileID: 1781826902164939433, guid: bdbf98331374bb6489be5fa278db117b,
+        type: 3}
+      propertyPath: Rooms.Array.data[2]
+      value: 
+      objectReference: {fileID: 1426827117}
     - target: {fileID: 6713413350861251682, guid: bdbf98331374bb6489be5fa278db117b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1757,6 +1791,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285648890}
   m_CullTransparentMesh: 0
+--- !u!1 &1300907434 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7964570279965898828, guid: bdbf98331374bb6489be5fa278db117b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1225854234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1377078426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1926,7 +1966,7 @@ PrefabInstance:
     - target: {fileID: 4031448175896117376, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4031448175896117376, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
         type: 3}
@@ -2522,6 +2562,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1849731237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7546916718264218912, guid: 5fe80f1bfa7adef49b3c941c07af10dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1398421611}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1879302756
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,7 +2664,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: E, go to kitchen
+  m_Text: 'E, Go to kitchen.
+
+    E, Go to hallway'
 --- !u!222 &1879302760
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2747,6 +2795,7 @@ GameObject:
   - component: {fileID: 1944420064}
   - component: {fileID: 1944420063}
   - component: {fileID: 1944420062}
+  - component: {fileID: 1944420065}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2820,6 +2869,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1944420065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944420061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c4ce2f809c45bf4c9e046b0d9a0ff5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1300907434}
+  hallway: {fileID: 337673909}
+  kitchen: {fileID: 1426827117}
+  room: {fileID: 316422815}
+  doors:
+  - {fileID: 1129366975}
+  - {fileID: 1849731237}
+  - {fileID: 692549164}
+  openDoor: {fileID: 7400000, guid: 786b4af032266f94fb14598a5e7f006a, type: 2}
 --- !u!1 &1945529389
 GameObject:
   m_ObjectHideFlags: 0

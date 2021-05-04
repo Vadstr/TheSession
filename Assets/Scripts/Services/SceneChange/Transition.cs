@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Transition : MonoBehaviour
 {
@@ -8,7 +9,12 @@ public class Transition : MonoBehaviour
 
     private void Start()
     {
-        darkPanelForTransition = panel;
+        try
+        {
+            darkPanelForTransition = panel;
+        }
+        catch { }
+
         TransitionAnimationBack();
     }
 
