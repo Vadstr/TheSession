@@ -14,6 +14,7 @@ public class PlayerMoov : MonoBehaviour
 
     private Rigidbody2D rb;
     private GameObject hint;
+    private bool animate = false;
     private static float positionZ;
     public static float horizontal;
     public static float vertical;
@@ -71,8 +72,9 @@ public class PlayerMoov : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetAxis("Accept") != 0)
+        if (Input.GetAxis("Accept") != 0 && animate == false)
         {
+            animate = true;
             Debug.Log("maria loh");
         }
     }
@@ -80,5 +82,6 @@ public class PlayerMoov : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         Destroy(hint);
+        animate = false;
     }
 }
