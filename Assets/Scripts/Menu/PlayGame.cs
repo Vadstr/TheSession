@@ -12,19 +12,13 @@ public class PlayGame : MonoBehaviour
         Transition.TransitionAnimationFrom();
         yield return new WaitForSeconds(0.5f);
         allcomponent.gameObject.SetActive(true);
-        while (true) 
+        while (SavePlayerData.NameOfSave == null) 
         {
-            if (SavePlayerData.NameOfSave == null)
-            {
-                yield return new WaitForSeconds(0.01f);
-            }
-            else 
-            {
-                break;
-            }
+            yield return new WaitForSeconds(0.01f);
         }
         var save = new SaveSerializable();
         allcomponent.gameObject.SetActive(false);
+
         save.SaveGame();
         Transition.TransitionAnimationBack();
         yield return new WaitForSeconds(0.5f);

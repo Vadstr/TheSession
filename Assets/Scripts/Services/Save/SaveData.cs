@@ -10,7 +10,7 @@ public static class SavePlayerData
 {
     static public int LocationID;
     static public int StoryTrigger;
-    static public List<float> OtherCaracteristics;
+    static public Dictionary<float,string> OtherCaracteristics;
     static public Vector3 CoordinateOnScene;
     static public string NameOfSave;
 }
@@ -20,16 +20,10 @@ public class SaveSerializable
 {
     int LocationIDToSave;
     int StoryTriggerToSave;
-    List<float> OtherCaracteristicsToSave;
-    Vector3 CoordinateOnSceneToSave;
+    Dictionary<float, string> OtherCaracteristicsToSave;
+    float[] CoordinateOnSceneToSave = new float[3];
 
-    public SaveSerializable()
-    {
-        LocationIDToSave = 0;
-        StoryTriggerToSave = 0;
-        OtherCaracteristicsToSave = new List<float>();
-        CoordinateOnSceneToSave = new Vector3();
-    }
+    public SaveSerializable(){}
 
     public void SaveGame()
     {
@@ -39,7 +33,9 @@ public class SaveSerializable
         LocationIDToSave = SavePlayerData.LocationID;
         StoryTriggerToSave = SavePlayerData.StoryTrigger;
         OtherCaracteristicsToSave = SavePlayerData.OtherCaracteristics;
-        CoordinateOnSceneToSave = SavePlayerData.CoordinateOnScene;
+        CoordinateOnSceneToSave[0] = SavePlayerData.CoordinateOnScene.x;
+        CoordinateOnSceneToSave[1] = SavePlayerData.CoordinateOnScene.y;
+        CoordinateOnSceneToSave[2] = SavePlayerData.CoordinateOnScene.z;
         bf.Serialize(file, this);
         file.Close();
         Debug.Log("correct save");
@@ -56,7 +52,9 @@ public class SaveSerializable
             SavePlayerData.LocationID = data.LocationIDToSave;
             SavePlayerData.StoryTrigger = data.StoryTriggerToSave;
             SavePlayerData.OtherCaracteristics = data.OtherCaracteristicsToSave;
-            SavePlayerData.CoordinateOnScene = data.CoordinateOnSceneToSave;
+            SavePlayerData.CoordinateOnScene.x = data.CoordinateOnSceneToSave[0];
+            SavePlayerData.CoordinateOnScene.y = data.CoordinateOnSceneToSave[1];
+            SavePlayerData.CoordinateOnScene.z = data.CoordinateOnSceneToSave[2];
             SavePlayerData.NameOfSave = nameOfSave;
             Debug.Log("correct load");
         }

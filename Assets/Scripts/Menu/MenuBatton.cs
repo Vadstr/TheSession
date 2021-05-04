@@ -1,7 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuBatton : MonoBehaviour
@@ -41,6 +43,12 @@ public class MenuBatton : MonoBehaviour
             }
         }
         catch { }
+
+        if (Input.GetAxis("Cancel") != 0) 
+        {
+            Transition.TransitionAnimationFrom();
+            MySceneManager.LoadSceneByNumber(0);
+        }
     }
 
     public void NewGame()
@@ -69,6 +77,10 @@ public class MenuBatton : MonoBehaviour
         if (SaveSerializable.UniquiSaveName(NewGameName.text))
         {
             SavePlayerData.NameOfSave = NewGameName.text;
+            SavePlayerData.CoordinateOnScene = new Vector3(0,0,0);
+            SavePlayerData.LocationID = 1;
+            SavePlayerData.StoryTrigger = 0;
+            SavePlayerData.OtherCaracteristics = new Dictionary<float, string>();
             NewGameName.text = null;
         }
         else 
