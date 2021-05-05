@@ -64,18 +64,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\DebugScript.cs" />
     <Compile Include="Assets\Scripts\Home\RoomsTransition.cs" />
+    <Compile Include="Assets\Scripts\Home\StartRoom.cs" />
     <Compile Include="Assets\Scripts\Menu\Autors.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuBatton.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuText.cs" />
     <Compile Include="Assets\Scripts\Menu\PlayGame.cs" />
     <Compile Include="Assets\Scripts\Menu\ShowSaves.cs" />
+    <Compile Include="Assets\Scripts\Services\PauseMenu\PauseMenuButtons.cs" />
     <Compile Include="Assets\Scripts\Services\Player\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Services\Player\PlayerMoov.cs" />
     <Compile Include="Assets\Scripts\Services\Save\LanguageID.cs" />
     <Compile Include="Assets\Scripts\Services\Save\SaveData.cs" />
     <Compile Include="Assets\Scripts\Services\SceneChange\MovingBetweenRooms.cs" />
-    <Compile Include="Assets\Scripts\Services\SceneChange\SceneManager.cs" />
+    <Compile Include="Assets\Scripts\Services\SceneChange\MySceneManager.cs" />
     <Compile Include="Assets\Scripts\Services\SceneChange\Transition.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

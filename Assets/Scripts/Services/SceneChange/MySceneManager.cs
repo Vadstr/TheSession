@@ -9,13 +9,6 @@ public static class MySceneManager
     {
         Transition.TransitionAnimationFrom();
         Debug.Log("Correct load scene");
-        SceneManager.LoadScene(scenNumber);
-    }
-
-    public static void LoadScene()
-    {
-        SavePlayerData.LocationID = SceneManager.GetActiveScene().buildIndex;
-        new SaveSerializable().SaveGame();
-        Transition.TransitionAnimationBack();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(scenNumber);
     }
 }

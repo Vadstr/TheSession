@@ -34,7 +34,7 @@ public class PlayerMoov : MonoBehaviour
         Player.transform.position = new Vector3(horizontal * speed * Time.deltaTime + position.x, vertical * speed * Time.deltaTime + position.y, 90);*/
 
         rb.velocity = new Vector3(horizontal * speedH * Time.deltaTime, vertical * speedV * Time.deltaTime);
-        Player.transform.position = new Vector3(position.x, position.y, position.y + 83.5f);
+        Player.transform.position = new Vector3(position.x, position.y, position.y * 2 + 83.5f);
         yPozFromPrevFrame = position.y;
         if (Input.GetAxis("Save") != 0 )
         {
@@ -74,15 +74,30 @@ public class PlayerMoov : MonoBehaviour
         var textHintText = hint.transform.Find("HintText").GetComponent<Text>();
         var textTrigger = Other.GetComponent<Text>().text.Split('.');
 
-        int index;
-        if (Other.transform.position.y > GetComponent<Transform>().position.y)
+        int index = 0;
+        if (RoomsTransition.Doors[RoomsTransition.NearestDoor(Other)].tag == "Face")
         {
-            index = 0;
+            if (Other.transform.position.y > GetComponent<Transform>().position.y)
+            {
+                index = 0;
+            }
+            else
+            {
+                index = 1;
+            }
         }
-        else 
+        else if (RoomsTransition.Doors[RoomsTransition.NearestDoor(Other)].tag == "From side")
         {
-            index = 1;
+            if (Other.transform.position.x < GetComponent<Transform>().position.x)
+            {
+                index = 0;
+            }
+            else
+            {
+                index = 1;
+            }
         }
+
         textHintButton.text = textTrigger[index].Substring(0,1);
         textHintText.text = textTrigger[index].Substring(3);
     }
@@ -92,38 +107,31 @@ public class PlayerMoov : MonoBehaviour
         {
             animate = true;
             Destroy(hint);
-            StartCoroutine(RoomsTransition.OpenNearestDoor(collision));
+            RoomsTransition.OpenNearestDoor(collision);
 
             if (collision.transform.position.y < GetComponent<Transform>().position.y)
             {
-                var textTrigger = collision.GetComponent<Text>().text.Split('.');
-                var locationName = textTrigger[1].Substring(9);
-                StartCoroutine(RoomsTransition.HideAndShowHallway(locationName));
+                StartCoroutine(RoomsTransition.HideAndShowHallway(collision.GetComponent<Text>().text.Split('.')[1].Substring(9)));
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        StartCoroutine(RoomsTransition.CloseDoor(collision));
-
-        int index;
+        RoomsTransition.CloseDoor(collision);
+        var textTrigger = collision.GetComponent<Text>().text.Split('.');
+        string locationName;
         if (collision.transform.position.y < GetComponent<Transform>().position.y)
         {
-            index = 0;
+            locationName = textTrigger[0].Substring(9);
+            StartCoroutine(RoomsTransition.HideAndShowHallway(locationName));
         }
         else
         {
-            index = 1;
+            locationName = textTrigger[1].Substring(9);
         }
 
-        var textTrigger = collision.GetComponent<Text>().text.Split('.');
-        var locationName = textTrigger[index].Substring(9);
         StartCoroutine(RoomsTransition.MoovCamera(locationName));
-        if (locationName != "hallway")
-        {
-            StartCoroutine(RoomsTransition.HideAndShowHallway(locationName));
-        }
 
         animate = false;
         try

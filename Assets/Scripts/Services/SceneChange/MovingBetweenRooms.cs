@@ -17,7 +17,7 @@ public class TransitionB : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
-                SceneManager.LoadScene(scenNumber);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(scenNumber);
 
             }
         }

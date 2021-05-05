@@ -47,7 +47,7 @@ public class MenuBatton : MonoBehaviour
         if (Input.GetAxis("Cancel") != 0) 
         {
             Transition.TransitionAnimationFrom();
-            MySceneManager.LoadSceneByNumber(0);
+            SceneManager.LoadScene(0);
         }
     }
 

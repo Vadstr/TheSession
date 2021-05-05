@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayGame : MonoBehaviour
@@ -22,7 +23,7 @@ public class PlayGame : MonoBehaviour
         save.SaveGame();
         Transition.TransitionAnimationBack();
         yield return new WaitForSeconds(0.5f);
-        MySceneManager.LoadSceneByNumber(1);
+        SceneManager.LoadScene(1);
     }
 
     public static IEnumerator ContinueGame(GameObject allcomponent)
@@ -69,7 +70,7 @@ public class PlayGame : MonoBehaviour
             continuePanel.GetComponent<Animator>().SetTrigger("hight");
             yield return new WaitForSeconds(0.7f);
             allcomponent.gameObject.SetActive(false);
-            MySceneManager.LoadSceneByNumber(SavePlayerData.LocationID);
+            SceneManager.LoadScene(SavePlayerData.LocationID);
         }
         yield return new WaitForSeconds(0.5f);
     }

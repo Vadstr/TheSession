@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Rooms 
-{
-    Hallway,
-    Kitchen,
-    Room
-}
-
 public class RoomsTransition : MonoBehaviour
 {
     public GameObject player;
@@ -27,24 +20,39 @@ public class RoomsTransition : MonoBehaviour
         Hallway = hallway;
     }
 
-    public static IEnumerator OpenNearestDoor(Collider2D doorPlace)
+    public static void OpenNearestDoor(Collider2D doorPlace)
     {
-        Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door", true);
-        yield return new WaitForEndOfFrame();
+        if (Doors[NearestDoor(doorPlace)].tag == "Face")
+        {
+            Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door", true);
+        }
+        else if (Doors[NearestDoor(doorPlace)].tag == "From side") 
+        {
+            Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door bathroom", true);
+        }
     }
 
-    public static IEnumerator CloseDoor(Collider2D doorPlace)
+    public static void CloseDoor(Collider2D doorPlace)
     {
-        Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door", false);
-        yield return new WaitForEndOfFrame();
+        if (Doors[NearestDoor(doorPlace)].tag == "Face")
+        {
+            Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door", false);
+        }
+        else if (Doors[NearestDoor(doorPlace)].tag == "From side") 
+        {
+            Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door bathroom", false);
+        }
     }
 
-    public static IEnumerator MoovCamera(string locationName) 
+    public static IEnumerator MoovCamera(string locationName)
     {
         var trigerName = "To" + locationName;
-        Camera.main.GetComponent<Animator>().SetBool(trigerName, true);
-        yield return new WaitForSeconds(0.5f);
-        Camera.main.GetComponent<Animator>().SetBool(trigerName, false);
+        if (locationName != "bathroom")
+        {
+            Camera.main.GetComponent<Animator>().SetBool(trigerName, true);
+            yield return new WaitForSeconds(0.5f);
+            Camera.main.GetComponent<Animator>().SetBool(trigerName, false);
+        }
     }
 
     public static IEnumerator HideAndShowHallway(string locationName) 
@@ -54,14 +62,14 @@ public class RoomsTransition : MonoBehaviour
         {
             Hallway.GetComponent<Animator>().SetBool("FromHallway", true);
             yield return new WaitForSeconds(0.5f);
-            Hallway.GetComponent<Animator>().SetBool("FromHallway", false);
         }
         else
         {
             Hallway.GetComponent<Animator>().SetBool("ToHallway", true);
             yield return new WaitForSeconds(0.5f);
-            Hallway.GetComponent<Animator>().SetBool("ToHallway", false);
         }
+        Hallway.GetComponent<Animator>().SetBool("FromHallway", false);
+        Hallway.GetComponent<Animator>().SetBool("ToHallway", false);
     }
 
 
