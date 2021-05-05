@@ -8,39 +8,42 @@ public class RoomsTransition : MonoBehaviour
     public GameObject hallway;
     public GameObject kitchen;
     public GameObject room;
+    public GameObject[] minigames;
     public GameObject[] doors;
     public AnimationClip openDoor;
     public static AnimationClip OpenDoor;
     public static GameObject[] Doors;
+    public static GameObject[] Minigames;
     public static GameObject Hallway;
 
     private void Start()
     {
         Doors = doors;
         Hallway = hallway;
+        Minigames = minigames;
     }
 
     public static void OpenNearestDoor(Collider2D doorPlace)
     {
-        if (Doors[NearestDoor(doorPlace)].tag == "Face")
+        if (Doors[NearestObjectByTag(doorPlace, Doors)].tag == "Face")
         {
-            Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door", true);
+            Doors[NearestObjectByTag(doorPlace, Doors)].GetComponent<Animator>().SetBool("open door", true);
         }
-        else if (Doors[NearestDoor(doorPlace)].tag == "From side") 
+        else if (Doors[NearestObjectByTag(doorPlace, Doors)].tag == "From side") 
         {
-            Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door bathroom", true);
+            Doors[NearestObjectByTag(doorPlace, Doors)].GetComponent<Animator>().SetBool("open door bathroom", true);
         }
     }
 
     public static void CloseDoor(Collider2D doorPlace)
     {
-        if (Doors[NearestDoor(doorPlace)].tag == "Face")
+        if (Doors[NearestObjectByTag(doorPlace, Doors)].tag == "Face")
         {
-            Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door", false);
+            Doors[NearestObjectByTag(doorPlace, Doors)].GetComponent<Animator>().SetBool("open door", false);
         }
-        else if (Doors[NearestDoor(doorPlace)].tag == "From side") 
+        else if (Doors[NearestObjectByTag(doorPlace, Doors)].tag == "From side") 
         {
-            Doors[NearestDoor(doorPlace)].GetComponent<Animator>().SetBool("open door bathroom", false);
+            Doors[NearestObjectByTag(doorPlace, Doors)].GetComponent<Animator>().SetBool("open door bathroom", false);
         }
     }
 
@@ -73,21 +76,21 @@ public class RoomsTransition : MonoBehaviour
     }
 
 
-    public static int NearestDoor(Collider2D doorPlace)
+    public static int NearestObjectByTag(Collider2D Other, GameObject[] objects)
     {
-        var nearestDoor = new int();
+        var nearestObjectIndex = new int();
         var shortestDistance = float.MaxValue;
-        for (int i = 0; i < Doors.Length; i++)
+        for (int i = 0; i < objects.Length; i++)
         {
-            var xDifPosition = Mathf.Abs(Doors[i].transform.position.x - doorPlace.transform.position.x);
-            var yDifPosition = Mathf.Abs(Doors[i].transform.position.y - doorPlace.transform.position.y);
+            var xDifPosition = Mathf.Abs(objects[i].transform.position.x - Other.transform.position.x);
+            var yDifPosition = Mathf.Abs(Doors[i].transform.position.y - Other.transform.position.y);
             var distance = Mathf.Sqrt(Mathf.Pow(xDifPosition, 2) + Mathf.Pow(yDifPosition, 2));
             if (distance < shortestDistance)
             {
-                nearestDoor = i;
+                nearestObjectIndex = i;
                 shortestDistance = distance;
             }
         }
-        return nearestDoor;
+        return nearestObjectIndex;
     }
 }
