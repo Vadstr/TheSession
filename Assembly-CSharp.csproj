@@ -72,6 +72,8 @@
     <Compile Include="Assets\Scripts\Menu\MenuText.cs" />
     <Compile Include="Assets\Scripts\Menu\PlayGame.cs" />
     <Compile Include="Assets\Scripts\Menu\ShowSaves.cs" />
+    <Compile Include="Assets\Scripts\Services\AllertController.cs" />
+    <Compile Include="Assets\Scripts\Services\MiniGame\MiniGameController.cs" />
     <Compile Include="Assets\Scripts\Services\ObjectController.cs" />
     <Compile Include="Assets\Scripts\Services\PauseMenu\PauseMenuButtons.cs" />
     <Compile Include="Assets\Scripts\Services\Player\PlayerAnimator.cs" />

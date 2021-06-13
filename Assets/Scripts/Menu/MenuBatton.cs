@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -58,7 +59,16 @@ public class MenuBatton : MonoBehaviour
 
     public void ContinueGame()
     {
-        StartCoroutine(PlayGame.ContinueGame(ContinueGamePanel));
+        var saves = SaveSerializable.GetAllSavesFile();
+        var sortedListOfSave = new List<FileInfo>();
+        if (saves.Count != 0)
+        {
+            StartCoroutine(PlayGame.ContinueGame(ContinueGamePanel, saves, sortedListOfSave));
+        }
+        else
+        {
+            StartCoroutine(AllertController.ShowAllert(allertText, "0 saves"));
+        }
     }
 
     public void Authors()
@@ -85,7 +95,7 @@ public class MenuBatton : MonoBehaviour
         }
         else 
         {
-            StartCoroutine(ShowAllert());
+            StartCoroutine(AllertController.ShowAllert(allertText, "Not unigue name"));
         }
     }
 
@@ -102,19 +112,5 @@ public class MenuBatton : MonoBehaviour
         Transition.TransitionAnimationFrom();
         yield return StartCoroutine(autors.ShowAutors(autorsText, speed));
         yield return StartCoroutine(Transition.TransitionAnimationBack());
-    }
-
-    public IEnumerator ShowAllert() 
-    {
-        allertText.gameObject.SetActive(true);
-        allertText.color = new Color(1, 0, 0, 1);
-        yield return new WaitForSeconds(0.5f);
-        while (allertText.color.a >= 0.05) 
-        {
-            allertText.color = new Color(1, 0, 0, allertText.color.a - 0.01f);
-            yield return new WaitForSeconds(0.01f);
-        }
-        allertText.gameObject.SetActive(false);
-        yield break;
     }
 }

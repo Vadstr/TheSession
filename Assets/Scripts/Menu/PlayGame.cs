@@ -26,52 +26,47 @@ public class PlayGame : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public static IEnumerator ContinueGame(GameObject allcomponent)
+    public static IEnumerator ContinueGame(GameObject allcomponent, List<FileInfo> saves, List<FileInfo> sortedListOfSave)
     {
         Transition.TransitionAnimationFrom();
         var continuePanel = allcomponent.transform.Find("ContinuePanel");
         yield return new WaitForSeconds(0.7f);
-        var saves = SaveSerializable.GetAllSavesFile();
-        var sortedListOfSave = new List<FileInfo>();
-        if (saves.Count != 0)
+        allcomponent.gameObject.SetActive(true);
+        for (int i = saves.Count; i > 0; i--)
         {
-            allcomponent.gameObject.SetActive(true); 
-            for (int i = saves.Count; i > 0 ; i--)
+            FileInfo latestSave = null;
+            for (int j = 0; j < saves.Count; j++)
             {
-                FileInfo latestSave = null;
-                for (int j = 0; j < saves.Count; j++)
+                if (latestSave == null)
                 {
-                    if (latestSave == null)
-                    {
-                        latestSave = saves[j];
-                    }
-                    else if (latestSave.LastWriteTime < saves[j].LastWriteTime) 
-                    {
-                        latestSave = saves[j];
-                    }
+                    latestSave = saves[j];
                 }
-
-                for (int j = 0; j < saves.Count; j++) 
+                else if (latestSave.LastWriteTime < saves[j].LastWriteTime)
                 {
-                    if (latestSave.Name == saves[j].Name)
-                        saves.Remove(saves[j]);
-                } 
-                sortedListOfSave.Add(latestSave);
+                    latestSave = saves[j];
+                }
             }
-            ShowSaves.ShowSavesAndData(sortedListOfSave);
-            continuePanel.GetComponent<Animator>().SetTrigger("Show");
-            yield return new WaitForSeconds(0.7f);
-            continuePanel.gameObject.SetActive(false);
-            while (SavePlayerData.NameOfSave == null) 
+
+            for (int j = 0; j < saves.Count; j++)
             {
-                yield return new WaitForSeconds(0.05f);
+                if (latestSave.Name == saves[j].Name)
+                    saves.Remove(saves[j]);
             }
-            continuePanel.gameObject.SetActive(true);
-            continuePanel.GetComponent<Animator>().SetTrigger("hight");
-            yield return new WaitForSeconds(0.7f);
-            allcomponent.gameObject.SetActive(false);
-            SceneManager.LoadScene(SavePlayerData.LocationID);
+            sortedListOfSave.Add(latestSave);
         }
+        ShowSaves.ShowSavesAndData(sortedListOfSave);
+        continuePanel.GetComponent<Animator>().SetTrigger("Show");
+        yield return new WaitForSeconds(0.7f);
+        continuePanel.gameObject.SetActive(false);
+        while (SavePlayerData.NameOfSave == null)
+        {
+            yield return new WaitForSeconds(0.05f);
+        }
+        continuePanel.gameObject.SetActive(true);
+        continuePanel.GetComponent<Animator>().SetTrigger("hight");
+        yield return new WaitForSeconds(0.7f);
+        allcomponent.gameObject.SetActive(false);
+        SceneManager.LoadScene(SavePlayerData.LocationID);
         yield return new WaitForSeconds(0.5f);
     }
 }
