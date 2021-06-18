@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class MySceneManager
+public class MySceneManager : MonoBehaviour
 {
-    public static void LoadSceneByNumber(int scenNumber) 
+    private int scenNumber;
+    public void LoadSceneByNumber(int sceneNumber) 
     {
+        scenNumber = sceneNumber;
         Transition.TransitionAnimationFrom();
+        Invoke("LoadScene", 0.5f);
+    }
+
+    private void LoadScene()
+    {
         Debug.Log("Correct load scene");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(scenNumber);
+        SceneManager.LoadScene(scenNumber);
     }
 }

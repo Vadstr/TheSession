@@ -23,7 +23,9 @@ public class PlayGame : MonoBehaviour
         save.SaveGame();
         Transition.TransitionAnimationBack();
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(1);
+        var sceneManager = new GameObject();
+        var manager = sceneManager.AddComponent<MySceneManager>();
+        manager.LoadSceneByNumber(2);
     }
 
     public static IEnumerator ContinueGame(GameObject allcomponent, List<FileInfo> saves, List<FileInfo> sortedListOfSave)
@@ -65,8 +67,10 @@ public class PlayGame : MonoBehaviour
         continuePanel.gameObject.SetActive(true);
         continuePanel.GetComponent<Animator>().SetTrigger("hight");
         yield return new WaitForSeconds(0.7f);
-        allcomponent.gameObject.SetActive(false);
-        SceneManager.LoadScene(SavePlayerData.LocationID);
+        allcomponent.gameObject.SetActive(false); 
+        var sceneManager = new GameObject();
+        var manager = sceneManager.AddComponent<MySceneManager>();
+        manager.LoadSceneByNumber(SavePlayerData.LocationID);
         yield return new WaitForSeconds(0.5f);
     }
 }

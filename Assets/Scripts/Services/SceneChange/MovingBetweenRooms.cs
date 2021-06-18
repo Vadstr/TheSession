@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TransitionB : MonoBehaviour
+public class TransitionBetweenRooms : MonoBehaviour
 {
     public GameObject door;
     public GameObject prompt;
@@ -17,8 +17,9 @@ public class TransitionB : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(scenNumber);
-
+                var sceneManager = new GameObject();
+                var manager = sceneManager.AddComponent<MySceneManager>();
+                manager.LoadSceneByNumber(scenNumber);
             }
         }
     }

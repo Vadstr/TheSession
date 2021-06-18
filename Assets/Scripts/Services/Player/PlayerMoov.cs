@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class PlayerMoov : MonoBehaviour
 {
     public GameObject Hint;
     public GameObject Player;
-    public int speedH = 450;
-    public int speedV = 250;
+    public int speedH = 800;
+    public int speedV = 350;
 
     private Rigidbody2D rb;
     private GameObject hint;
@@ -175,8 +176,20 @@ public class PlayerMoov : MonoBehaviour
             case "MiniGameTrigger":
                 StartCoroutine(RoomsTransition.MoovCamera("mini game"));
                 GetComponent<Animator>().SetBool("Hight", true);
-                RoomsTransition.Minigames[RoomsTransition.NearestObjectByTag(Other, RoomsTransition.Minigames)].GetComponent<Animator>().SetBool("Show", true);
+                var nearestMiniGame = RoomsTransition.Minigames[RoomsTransition.NearestObjectByTag(Other, RoomsTransition.Minigames)];
+                nearestMiniGame.GetComponent<Animator>().SetBool("Show", true);
+                MiniGameController.PlayMiniGame(nearestMiniGame);
                 lockPlayerControl = !lockPlayerControl;
+                break;
+            default:
+                var nameOfFather = Other.name;
+                var father = GameObject.Find(nameOfFather);
+                var childsCount = father.transform.GetChildCount();
+                for (int i = 0; i < childsCount; i++) 
+                {
+                    var child = father.transform.GetChild(i);
+                    child.gameObject.SetActive(!child.gameObject.activeSelf);
+                }
                 break;
         }
     }

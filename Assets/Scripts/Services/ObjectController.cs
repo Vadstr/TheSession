@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectController : MonoBehaviour
 {
     public GameObject objectForMoov;
-    public int speed = 500;
+    public int speed = 1500;
     public bool horizontalAcces;
     public bool verticalAcces;
 

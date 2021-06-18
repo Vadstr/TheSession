@@ -119,8 +119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hint: {fileID: 3035348518279239274, guid: caf040989c0113e449ec91a04aecc502, type: 3}
   Player: {fileID: 7964570279965898828}
-  speedH: 450
-  speedV: 250
+  speedH: 800
+  speedV: 350
 --- !u!114 &5303478610968789030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +146,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.014997415, y: -0.17711806}
+  m_Offset: {x: 0.015191816, y: -0.178664}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -157,7 +157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.17068665, y: 0.04576388}
+  m_Size: {x: 0.16479425, y: 0.042774618}
   m_EdgeRadius: 0
 --- !u!50 &4683514794977059833
 Rigidbody2D:

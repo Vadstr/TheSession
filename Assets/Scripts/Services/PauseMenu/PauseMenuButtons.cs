@@ -21,6 +21,8 @@ public class PauseMenuButtons : MonoBehaviour
     public void ExitToMenu()
     {
         DebugScript.UnPause();
-        SceneManager.LoadScene(0);
+        var sceneManager = new GameObject();
+        var manager = sceneManager.AddComponent<MySceneManager>();
+        manager.LoadSceneByNumber(1);
     }
 }

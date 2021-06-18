@@ -48,7 +48,9 @@ public class MenuBatton : MonoBehaviour
         if (Input.GetAxis("Cancel") != 0) 
         {
             Transition.TransitionAnimationFrom();
-            SceneManager.LoadScene(0);
+            var sceneManager = new GameObject();
+            var manager = sceneManager.AddComponent<MySceneManager>();
+            manager.LoadSceneByNumber(1);
         }
     }
 
@@ -88,7 +90,7 @@ public class MenuBatton : MonoBehaviour
         {
             SavePlayerData.NameOfSave = NewGameName.text;
             SavePlayerData.CoordinateOnScene = new Vector3(0,0,0);
-            SavePlayerData.LocationID = 1;
+            SavePlayerData.LocationID = 2;
             SavePlayerData.StoryTrigger = 0;
             SavePlayerData.OtherCaracteristics = new Dictionary<float, string>();
             NewGameName.text = null;
